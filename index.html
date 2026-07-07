@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MBTI 性格测试原型</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
+    <script src="./questions-data.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="homeView" class="view view-active">
+        <div class="hero">
+          <div class="hero-kicker">3 分钟轻量测试</div>
+          <h1>发现你的 MBTI 倾向</h1>
+          <p>
+            通过一组日常选择题，了解你在能量来源、信息处理、决策方式和生活节奏上的偏好。
+          </p>
+        </div>
+
+        <div class="feature-grid" aria-label="测试特点">
+          <div>
+            <strong>16 型结果</strong>
+            <span>快速生成类型说明</span>
+          </div>
+          <div>
+            <strong>维度分布</strong>
+            <span>可视化展示偏好强弱</span>
+          </div>
+          <div>
+            <strong>适合作品集</strong>
+            <span>完整交互流程</span>
+          </div>
+        </div>
+
+        <button id="startBtn" class="primary-btn" type="button">开始测试</button>
+        <p class="hint">结果仅供自我探索参考，不作为专业心理诊断。</p>
+      </section>
+
+      <section id="quizView" class="view" aria-live="polite">
+        <header class="quiz-header">
+          <button id="backHomeBtn" class="ghost-btn" type="button">退出</button>
+          <div class="progress-copy">
+            <span id="progressText">1 / 12</span>
+            <strong id="dimensionText">E / I</strong>
+          </div>
+        </header>
+
+        <div class="progress-track" aria-hidden="true">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div id="questionStage" class="question-stage">
+          <article id="questionCard" class="question-card">
+            <span id="questionNumber" class="question-number">Q1</span>
+            <h2 id="questionText"></h2>
+            <div class="options">
+              <button id="optionA" class="option-btn" type="button"></button>
+              <button id="optionB" class="option-btn" type="button"></button>
+            </div>
+          </article>
+        </div>
+
+        <footer class="quiz-footer">
+          <button id="prevBtn" class="secondary-btn" type="button">上一题</button>
+          <button id="nextBtn" class="primary-btn" type="button">下一题</button>
+        </footer>
+      </section>
+
+      <section id="resultView" class="view">
+        <div class="result-head">
+          <span class="result-label">你的类型</span>
+          <h1 id="resultType">ENFJ</h1>
+          <h2 id="resultTitle">主人公</h2>
+          <p id="resultDescription"></p>
+        </div>
+
+        <section class="chart-section" aria-label="维度得分分布">
+          <div class="section-title">
+            <h3>维度分布</h3>
+            <span id="chartSummary"></span>
+          </div>
+          <canvas id="scoreChart" height="210"></canvas>
+          <div id="chartFallback" class="chart-fallback" hidden></div>
+        </section>
+
+        <section class="result-section">
+          <h3>优势特质</h3>
+          <ul id="strengthList" class="tag-list"></ul>
+        </section>
+
+        <section class="result-section">
+          <h3>职业建议</h3>
+          <ul id="careerList" class="tag-list"></ul>
+        </section>
+
+        <div class="result-actions">
+          <button id="retryBtn" class="secondary-btn" type="button">重新测试</button>
+          <button id="shareBtn" class="primary-btn" type="button">复制结果文案</button>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
