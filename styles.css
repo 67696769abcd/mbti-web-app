@@ -343,6 +343,22 @@ button {
   background: rgba(255, 255, 255, 0.92);
 }
 
+/* 单独给图表区加高度 */
+.chart-section {
+  height: 300px;           /* 固定容器高度 */
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-section .section-title {
+  flex-shrink: 0;          /* 标题不被压缩 */
+}
+
+#scoreChart {
+  flex: 1;                 /* 图表占满剩余空间 */
+  width: 100% !important;
+  height: 100% !important; /* 让 canvas 填满容器 */
+}
 .section-title {
   display: flex;
   align-items: baseline;
